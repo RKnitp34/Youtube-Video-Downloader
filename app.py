@@ -46,7 +46,6 @@ def playlist_down(playlist_url):
         audio_stream = video.streams.get_audio_only()
         st.write(f"Downloading audio for {video_filename}")
         audio_stream.download(filename=f"{video_path}")
-    st.write('above code ran successfully!!!!!!!!!!!!!!!!!!!!')
     
 def download_one(video_url):
     video = YouTube(video_url,use_oauth=True,allow_oauth_cache=True)
@@ -59,8 +58,6 @@ def download_one(video_url):
         audio_stream.download(filename=f"{video_filename}")
     except:
         st.write(f'Failed to download {video_filename}!!!!!')
-
-    st.write("audio was downloaded successfully") 
 
 
 # Main function
@@ -75,6 +72,9 @@ def main():
         if st.button("Download"):
             if youtube_url:
                 playlist_down(youtube_url)
+                with st.spinner('Downloading...'):
+                    st.success('Download Complete', icon="✅")       
+                    st.balloons()
 
     
     if selected == "Video link":
@@ -84,16 +84,9 @@ def main():
         if st.button("Download"):
             if youtube_url:
                 download_one(youtube_url)
-#
-
-
-    # # Input box for download path
-    # download_path = st.text_input("Enter download path (Leave empty for default 'downloads' folder):")
-
-
-    
-
-
+                with st.spinner('Downloading...'):
+                    st.success('Download Complete', icon="✅")       
+                    st.balloons()
 
 def streamlit_menu():
     # 2. horizontal menu with custom style
